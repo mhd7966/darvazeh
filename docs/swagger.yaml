@@ -1,0 +1,247 @@
+basePath: /v0
+definitions:
+  models.Domain:
+    properties:
+      account:
+        type: string
+      kind:
+        default: Native
+        type: string
+      name:
+        type: string
+      type:
+        default: Zone
+        type: string
+      url:
+        type: string
+    required:
+    - url
+    type: object
+  models.RecordBody:
+    properties:
+      domain:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      priority:
+        default: 7000
+        type: integer
+      ttl:
+        default: 3600
+        type: integer
+      type:
+        type: string
+      value:
+        type: string
+    required:
+    - domain
+    - name
+    - ttl
+    - type
+    - value
+    type: object
+  models.Response:
+    properties:
+      data:
+        type: object
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: I have no specific description
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Darvazeh API
+  version: "1.0"
+paths:
+  /domain:
+    post:
+      description: new record
+      operationId: new_record
+      parameters:
+      - description: 'Record info: *Just MX record must have priority*'
+        in: body
+        name: recordBody
+        required: true
+        schema:
+          $ref: '#/definitions/models.RecordBody'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: new record
+  /domain/{domain_name}:
+    get:
+      description: return domain info
+      operationId: get_info_of_domain
+      parameters:
+      - description: domain_name
+        in: path
+        name: domain_name
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get domain info
+  /domain/{record_id}:
+    delete:
+      description: delete record info
+      operationId: delete_record
+      parameters:
+      - description: record_id
+        in: path
+        name: record_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: delete record
+    put:
+      description: update_record
+      operationId: update_record
+      parameters:
+      - description: record_id
+        in: path
+        name: record_id
+        required: true
+        type: string
+      - description: Record info
+        in: body
+        name: recordBody
+        required: true
+        schema:
+          $ref: '#/definitions/models.RecordBody'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: update record
+  /domain/checkns/{domain_name}:
+    get:
+      description: check NS
+      operationId: check NS
+      parameters:
+      - description: domain_name
+        in: path
+        name: domain_name
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: check NS
+  /domains:
+    get:
+      description: return all domains of a userID
+      operationId: get_all_domains_by_userID
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get all domains
+    post:
+      description: new domain
+      operationId: new_domain
+      parameters:
+      - description: Domain info ->[account = user_id]
+        in: body
+        name: domainModel
+        required: true
+        schema:
+          $ref: '#/definitions/models.Domain'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: new domain
+  /domains/{domain_name}:
+    delete:
+      description: delete all domain info
+      operationId: delete_domain
+      parameters:
+      - description: domain_name
+        in: path
+        name: domain_name
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: delete domain
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

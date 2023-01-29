@@ -1,0 +1,78 @@
+version: '2.4'
+
+x-common-variables: &common-variables
+  - TZ=Asia/Tehran
+  - MYSQL_HOST=pdns-mysql
+  - MYSQL_PORT=3306
+  - MYSQL_USER=root
+  - MYSQL_PASS=root
+  - MYSQL_NAME=pdns
+  - PDNS_HOST=pdns-mysql:8081
+  - PDNS_X-API-Key=gngjngogjrngoeng
+  - PDNS_SERVERID=pdns-mysql
+  - NS1=NS1.ABR.OOO
+  - NS2=NS2.ABR.OOO
+  - LOGLEVEL=debug
+  - LOG_OUTPUT_TYPE=stdout
+  - LOG_FILE_Add=/log.txt
+  - AUTH_HOST=https://api.abr.ooo/v0/user
+  - SENTRY_DSN=https://ed96d3772320465aa646cf4882fccc1c@sentry.abr.ooo/5
+  - SENTRY_LEVEL=error
+
+  
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    pid: "host"
+    environment: *common-variables
+    ports:
+      - "3000:3000"
+    depends_on:
+      - pdns
+    # Resource Limit> CPU: 2 core - Memory: 2GB
+    # cpus: 2.0
+    # cpu_count: 2
+    # mem_limit: 2000000000
+
+### port in power dns should be 8080 in debug level -> bacause systemd-resolver bind port 53
+  pdns:
+    image: pschiffe/pdns-mysql:4.4
+    restart: always
+    ports:
+      - "53:53"
+      - "53:53/udp"
+      - "8081:8081"
+    environment:
+      - PDNS_gmysql_host=pdns-mysql
+      - PDNS_gmysql_user=root
+      - PDNS_gmysql_password=root
+      - PDNS_gmysql_dbname=pdns
+      - PDNS_api=yes
+      - PDNS_api_key=gngjngogjrngoe
+      - PDNS_webserver=yes
+      - PDNS_webserver_address=0.0.0.0
+      - PDNS_webserver_allow_from=172.0.0.0/8
+    depends_on:
+      - pdns-mysql
+    # Resource Limit> CPU: 2 core - Memory: 2GB
+    # cpus: 2.0
+    # cpu_count: 2
+    # mem_limit: 2000000000
+
+  pdns-mysql:
+    image: mysql:8.0.26
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - /dockerv/pdns-mysql/data:/var/lib/mysql
+    # Resource Limit> CPU: 2 core - Memory: 2GB
+    # cpus: 2.0
+    # cpu_count: 2
+    # mem_limit: 2000000000
