@@ -3,12 +3,12 @@ package repositories
 import (
 	"strconv"
 
-	"github.com/abr-ooo/darvazeh/connections"
-	"github.com/abr-ooo/darvazeh/models"
+	"github.com/mhd7966/darvazeh/connections"
+	"github.com/mhd7966/darvazeh/models"
 	log "github.com/sirupsen/logrus"
 )
 
-//Find previous records that have same type
+// Find previous records that have same type
 func PreviousRecords(recordName string, recordType string) (*[]string, bool, error) {
 
 	if last := len(recordName) - 1; last >= 0 && recordName[last] == '.' {

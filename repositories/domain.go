@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"github.com/abr-ooo/darvazeh/connections"
+	"github.com/mhd7966/darvazeh/connections"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -112,24 +112,23 @@ func GetDOmain(domainID string) (*string, error) {
 	return &domain, nil
 }
 
-
-func VerifyUserDomain(user_id string, domain_name string) (bool, error){
+func VerifyUserDomain(user_id string, domain_name string) (bool, error) {
 	query := "SELECT * FROM domains WHERE account=? and name=?"
 	result, err := connections.MYSQL.Query(query, user_id, domain_name)
 
 	if err != nil {
 		log.WithFields(log.Fields{
-			"user_id": user_id,
+			"user_id":     user_id,
 			"domain_name": domain_name,
-			"error": err.Error(),
+			"error":       err.Error(),
 		}).Debug("Execution *VerifyUserDomain* query in DB have error!")
 		return false, err
 	}
 	verify := result.Next()
 
 	log.WithFields(log.Fields{
-		"verify": verify,
-		"user_id": user_id,
+		"verify":      verify,
+		"user_id":     user_id,
 		"domain_name": domain_name,
 	}).Debug("Repo.Verify User Domain Finish :))")
 	return verify, nil

@@ -3,9 +3,9 @@ package log
 import (
 	"os"
 
-	"github.com/abr-ooo/darvazeh/config"
 	"github.com/evalphobia/logrus_sentry"
 	"github.com/getsentry/raven-go"
+	"github.com/mhd7966/darvazeh/config"
 	"github.com/sirupsen/logrus"
 )
 

@@ -6,14 +6,14 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/abr-ooo/darvazeh/config"
-	"github.com/abr-ooo/darvazeh/log"
-	"github.com/abr-ooo/darvazeh/models"
-	"github.com/abr-ooo/darvazeh/repositories"
-	"github.com/abr-ooo/darvazeh/services/pdns"
 	gopkgs "github.com/abr-ooo/go-pkgs"
 	"github.com/gofiber/fiber/v2"
 	"github.com/lixiangzhong/dnsutil"
+	"github.com/mhd7966/darvazeh/config"
+	"github.com/mhd7966/darvazeh/log"
+	"github.com/mhd7966/darvazeh/models"
+	"github.com/mhd7966/darvazeh/repositories"
+	"github.com/mhd7966/darvazeh/services/pdns"
 	"github.com/sirupsen/logrus"
 )
 

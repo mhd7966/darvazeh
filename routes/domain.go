@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"github.com/abr-ooo/darvazeh/controllers"
 	"github.com/gofiber/fiber/v2"
+	"github.com/mhd7966/darvazeh/controllers"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -18,5 +18,4 @@ func DomainRouter(app fiber.Router) {
 
 	log.Info("Domain routes created :)")
 
-	
 }

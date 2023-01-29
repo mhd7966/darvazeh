@@ -3,10 +3,10 @@ package middleware
 import (
 	"time"
 
-	"github.com/abr-ooo/darvazeh/config"
 	sentryfiber "github.com/aldy505/sentry-fiber"
 	"github.com/getsentry/sentry-go"
 	"github.com/gofiber/fiber/v2"
+	"github.com/mhd7966/darvazeh/config"
 )
 
 func InitApiSentry(app fiber.Router) {

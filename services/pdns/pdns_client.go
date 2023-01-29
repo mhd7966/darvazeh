@@ -5,9 +5,9 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/abr-ooo/darvazeh/models"
-	"github.com/abr-ooo/darvazeh/config"
 	"github.com/imroc/req"
+	"github.com/mhd7966/darvazeh/config"
+	"github.com/mhd7966/darvazeh/models"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -117,7 +117,7 @@ func ManageRecord(record models.RecordModel) error {
 		log.WithFields(log.Fields{
 			"url":    url,
 			"result": r,
-			"error":  err.Error() ,
+			"error":  err.Error(),
 		}).Debug("PDNS. ManageRecord have error!")
 		return err
 	}

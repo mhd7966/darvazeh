@@ -1,15 +1,15 @@
 package main
 
 import (
-	"github.com/abr-ooo/darvazeh/config"
-	"github.com/abr-ooo/darvazeh/connections"
-	_ "github.com/abr-ooo/darvazeh/docs"
-	"github.com/abr-ooo/darvazeh/log"
-	"github.com/abr-ooo/darvazeh/middleware"
-	"github.com/abr-ooo/darvazeh/routes"
 	sentryfiber "github.com/aldy505/sentry-fiber"
 	swagger "github.com/arsmn/fiber-swagger/v2"
 	"github.com/gofiber/fiber/v2"
+	"github.com/mhd7966/darvazeh/config"
+	"github.com/mhd7966/darvazeh/connections"
+	_ "github.com/mhd7966/darvazeh/docs"
+	"github.com/mhd7966/darvazeh/log"
+	"github.com/mhd7966/darvazeh/middleware"
+	"github.com/mhd7966/darvazeh/routes"
 )
 
 //// @host localhost:3000 -> if set when you have domain you should set domain and then you want to test it localy -> change the host -> nazarim behtare

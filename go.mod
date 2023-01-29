@@ -1,4 +1,4 @@
-module github.com/abr-ooo/darvazeh
+module github.com/mhd7966/darvazeh
 
 go 1.16
 

@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/abr-ooo/darvazeh/config"
-	"github.com/abr-ooo/darvazeh/log"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/mhd7966/darvazeh/config"
+	"github.com/mhd7966/darvazeh/log"
 	"github.com/sirupsen/logrus"
 )
 
